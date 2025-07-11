@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="aadhaar_download_title">Download Aadhaar | Digital India Access Training</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/aadhaar.css" />
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+  <script src="../../js/i18n.js" defer></script>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="select_language" data-i18n="select_language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo" data-i18n="logo_alt" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="aadhaar_dashboard.html" class="active" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Main Section -->
+  <section class="download-section">
+    <h2 data-i18n="aadhaar_review_heading">Review your Demographics Data</h2>
+
+    <div class="masked-option">
+      <input type="checkbox" id="masked" />
+      <label for="masked" data-i18n="masked_option">Do you want a masked Aadhaar?</label>
+    </div>
+
+    <div class="aadhaar-info">
+      <label data-i18n="label_name">Name:</label>
+      <span id="aadhaarName">Loading...</span>
+
+      <label data-i18n="label_gender">Gender:</label>
+      <span id="aadhaarGender">Loading...</span>
+
+      <label data-i18n="label_dob">Date of Birth:</label>
+      <span id="aadhaarDOB">Loading...</span>
+
+      <label data-i18n="label_address">Address:</label>
+      <span id="aadhaarAddress">Loading...</span>
+    </div>
+
+    <div class="download-buttons">
+      <button class="btn-back" onclick="window.history.back()" data-i18n="btn_back">Back</button>
+      <button class="btn-download" onclick="window.location.href='aadhaar_download_success.html'" data-i18n="btn_download">Download</button>
+    </div>
+  </section>
+
+  <!-- Data Fetch Script -->
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // No token means user is not logged in; redirect to login page
+      alert("Please log in first.");
+      window.location.href = "login.html";
+      return;
+    }
+    try {
+      const res = await fetch('http://localhost:3001/api/user/profile', {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.error("Failed to fetch profile:", data);
+        alert(data.message || "Failed to retrieve user info.");
+        return;
+      }
+      // ✅ Populate dashboard with user data
+      document.getElementById('aadhaarName').textContent = data.fullName;
+      document.getElementById('aadhaarAddress').textContent = data.address;
+      document.getElementById('aadhaarGender').textContent = data.gender || 'N/A';
+      document.getElementById('aadhaarDOB').textContent = data.dob || 'N/A';
+      // (If there are other dynamic fields to show, set them here as well)
+    } catch (err) {
+      console.error("Error fetching profile:", err);
+      alert("Could not load user data. Please try again.");
+    }
+  });
+</script>
+</body>
+</html>

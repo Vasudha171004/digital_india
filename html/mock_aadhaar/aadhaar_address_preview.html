@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="aadhaar_preview_title">Preview Updated Address | Digital India Access Training</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/aadhaar.css" />
+  <script src="../../js/i18n.js" defer></script>
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="select_language" data-i18n="select_language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="te">తెలుగు</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" data-i18n="logo_alt" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" class="active" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="aadhaar_dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Preview Section -->
+  <section class="aadhaar-section">
+    <h2 data-i18n="aadhaar_preview_heading">Preview Your Address Before Submission</h2>
+
+    <div class="address-preview">
+      <div class="address-box">
+        <h3 data-i18n="aadhaar_current_address">Current Address</h3>
+        <p id="currentAddress" data-i18n="aadhaar_loading_address">Loading current address...</p>
+      </div>
+
+      <div class="address-box">
+        <h3 data-i18n="aadhaar_updated_address">Updated Address</h3>
+        <p id="updatedAddress" data-i18n="aadhaar_loading_updated">Loading updated address...</p>
+      </div>
+    </div>
+
+    <p class="supporting-link" style="margin-top: 1rem;" data-i18n="aadhaar_confirmation_note">
+      By submitting, you confirm the above address is correct and supported by a valid document (PoA).
+    </p>
+
+    <div class="download-buttons">
+      <button class="btn-back" onclick="window.history.back()" data-i18n="back_btn">Back</button>
+      <button class="btn-download" onclick="window.location.href='aadhaar_address_status.html'" data-i18n="submit_request">Submit Request</button>
+    </div>
+  </section>
+
+  <script>
+    async function fetchAddressData() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert("Please login first.");
+        window.location.href = "../login.html";
+        return;
+      }
+
+      try {
+        const profileRes = await fetch('http://localhost:3001/api/user/profile', {
+          headers: { Authorization: 'Bearer ' + token }
+        });
+        const profile = await profileRes.json();
+
+        const aadhaarRes = await fetch('http://localhost:3001/api/aadhaar/address/preview', {
+          headers: { Authorization: 'Bearer ' + token }
+        });
+        const aadhaar = await aadhaarRes.json();
+
+        const current = profile.address || 'Not available';
+        document.getElementById('currentAddress').textContent = current;
+
+        const upd = aadhaar.address;
+        if (upd) {
+          const full = [
+            upd.house,
+            upd.street,
+            upd.district,
+            `${upd.state} - ${upd.pincode}`
+          ].filter(Boolean).join(', ');
+          document.getElementById('updatedAddress').textContent = full;
+        } else {
+          document.getElementById('updatedAddress').textContent = 'Not submitted';
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Failed to load address data.");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchAddressData);
+  </script>
+</body>
+</html>

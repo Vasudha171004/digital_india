@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title data-i18n="title">Digital India Access Training</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/i18n.js" defer></script>
+  <link rel="icon" href="../images/india.png" type="image/png"/>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="select_language" data-i18n="select_language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" data-i18n="logo_alt" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="home.html" class="active" data-i18n="nav_home">Home</a>
+    <a href="courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Carousel Section -->
+  <div class="carousel-container">
+    <div class="carousel-slide active">
+      <img src="../images/banner1.png" alt="Learn in Your Language" data-i18n="banner1_alt" />
+      <div class="banner-text">
+        <h2 data-i18n="banner1_heading">Learn in Your Language</h2>
+        <p data-i18n="banner1_sub">Empowering Rural India through Mobile Education</p>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="../images/banner2.png" alt="Skill Up. Rise Up." data-i18n="banner2_alt" />
+      <div class="banner-text">
+        <h2 data-i18n="banner2_heading">Skill Up. Rise Up.</h2>
+        <p data-i18n="banner2_sub">Job-ready training made simple and accessible</p>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="../images/banner3.png" alt="Together, We Grow" data-i18n="banner3_alt" />
+      <div class="banner-text">
+        <h2 data-i18n="banner3_heading">Together, We Grow</h2>
+        <p data-i18n="banner3_sub">Digital learning for every generation</p>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="../images/banner4.png" alt="Empowering Women Together" data-i18n="banner4_alt" />
+      <div class="banner-text">
+        <h2 data-i18n="banner4_heading">Empowering Women Together</h2>
+        <p data-i18n="banner4_sub">Self-help groups learning digitally, step by step</p>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="../images/banner5.png" alt="Learning Without Age Limits" data-i18n="banner5_alt" />
+      <div class="banner-text">
+        <h2 data-i18n="banner5_heading">Learning Without Age Limits</h2>
+        <p data-i18n="banner5_sub">Children helping elders enter the digital world</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel Script -->
+  <script>
+    let idx = 0;
+    const slides = document.querySelectorAll(".carousel-slide");
+    function showSlide() {
+      slides.forEach((s, i) => s.classList.remove("active"));
+      slides[idx].classList.add("active");
+      idx = (idx + 1) % slides.length;
+    }
+    setInterval(showSlide, 4000);
+  </script>
+</body>
+</html>

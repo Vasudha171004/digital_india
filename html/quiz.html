@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="quiz_title">Quiz | Digital India Access Training</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <script src="../js/i18n.js" defer></script>
+  <link rel="icon" href="../images/india.png" type="image/png"/>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="select_language" data-i18n="select_language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Finalized Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" data-i18n="logo_alt" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="home.html" data-i18n="nav_home">Home</a>
+    <a href="courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="quiz.html" class="active" data-i18n="nav_quiz">Quiz</a>
+    <a href="certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Quiz Selection -->
+  <main class="quiz-selection-section">
+    <h2 data-i18n="select_quiz_module">Select a Quiz Module</h2>
+
+    <div class="quiz-cards">
+      <div class="card">
+        <div class="icon-wrapper">
+          <img src="../images/digilocker.png" alt="DigiLocker Icon" class="course-icon" data-i18n="digilocker_alt" />
+        </div>
+        <h3 data-i18n="quiz1_title">DigiLocker Basics</h3>
+        <p data-i18n="quiz1_desc">Test your knowledge about using DigiLocker for digital documents.</p>
+        <a href="mock_digilocker/quiz_digilocker.html" class="cta-btn" data-i18n="start_quiz">Start Quiz</a>
+      </div>
+
+      <div class="card">
+        <div class="icon-wrapper">
+          <img src="../images/ehospital.png" alt="eHospital Icon" class="course-icon" data-i18n="ehospital_alt" />
+        </div>
+        <h3 data-i18n="quiz2_title">eHospital Module</h3>
+        <p data-i18n="quiz2_desc">Test your skills in accessing health services online via eHospital.</p>
+        <a href="mock_ehospital/quiz_ehospital.html" class="cta-btn" data-i18n="start_quiz">Start Quiz</a>
+      </div>
+
+      <div class="card">
+        <div class="icon-wrapper">
+          <img src="../images/aadhar.jpg" alt="Aadhaar Icon" class="course-icon" data-i18n="aadhaar_alt" />
+        </div>
+        <h3 data-i18n="quiz3_title">Aadhaar eKYC</h3>
+        <p data-i18n="quiz3_desc">Check your understanding of Aadhaar eKYC and digital verification.</p>
+        <a href="mock_aadhaar/quiz_aadhaar.html" class="cta-btn" data-i18n="start_quiz">Start Quiz</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

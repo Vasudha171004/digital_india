@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="quiz_aadhaar_title">Quiz | Aadhaar eKYC Module</title>
+
+  <!-- ✅ Corrected paths -->
+  <link rel="stylesheet" href="../../css/style.css" />
+  <script src="../../js/i18n.js" defer></script>
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="te">తెలుగు</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" class="active" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="../services.html" data-i18n="nav_services">Services</a>
+    <a href="../dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Quiz Section -->
+ <main class="quiz-box">
+  <h2 class="quiz-title" data-i18n="aadhaar_quiz_heading">Aadhaar eKYC Module Quiz</h2>
+  <form id="quizForm" class="quiz-form">
+
+    <div class="quiz-question">
+      <p><span data-i18n="aadhaar_q1">1. What is Aadhaar eKYC used for?</span></p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q1" value="a" /> <span data-i18n="aadhaar_q1_a">Buying groceries</span></label>
+        <label><input type="radio" name="q1" value="b" /> <span data-i18n="aadhaar_q1_b">Identity verification</span></label>
+        <label><input type="radio" name="q1" value="c" /> <span data-i18n="aadhaar_q1_c">Entertainment</span></label>
+        <label><input type="radio" name="q1" value="d" /> <span data-i18n="aadhaar_q1_d">Ordering food</span></label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p><span data-i18n="aadhaar_q2">2. Is Aadhaar eKYC a government service?</span></p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q2" value="a" /> <span data-i18n="aadhaar_q2_a">No</span></label>
+        <label><input type="radio" name="q2" value="b" /> <span data-i18n="aadhaar_q2_b">Yes</span></label>
+        <label><input type="radio" name="q2" value="c" /> <span data-i18n="aadhaar_q2_c">Only for banks</span></label>
+        <label><input type="radio" name="q2" value="d" /> <span data-i18n="aadhaar_q2_d">Only for schools</span></label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p><span data-i18n="aadhaar_q3">3. What data is used in eKYC?</span></p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q3" value="a" /> <span data-i18n="aadhaar_q3_a">PAN details</span></label>
+        <label><input type="radio" name="q3" value="b" /> <span data-i18n="aadhaar_q3_b">Driving license</span></label>
+        <label><input type="radio" name="q3" value="c" /> <span data-i18n="aadhaar_q3_c">Aadhaar data</span></label>
+        <label><input type="radio" name="q3" value="d" /> <span data-i18n="aadhaar_q3_d">Email address</span></label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p><span data-i18n="aadhaar_q4">4. Can Aadhaar eKYC be used online?</span></p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q4" value="a" /> <span data-i18n="aadhaar_q4_a">No, only offline</span></label>
+        <label><input type="radio" name="q4" value="b" /> <span data-i18n="aadhaar_q4_b">Yes</span></label>
+        <label><input type="radio" name="q4" value="c" /> <span data-i18n="aadhaar_q4_c">Only with passport</span></label>
+        <label><input type="radio" name="q4" value="d" /> <span data-i18n="aadhaar_q4_d">Not sure</span></label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p><span data-i18n="aadhaar_q5">5. What is required to use eKYC?</span></p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q5" value="a" /> <span data-i18n="aadhaar_q5_a">Mobile number</span></label>
+        <label><input type="radio" name="q5" value="b" /> <span data-i18n="aadhaar_q5_b">Aadhaar number & OTP</span></label>
+        <label><input type="radio" name="q5" value="c" /> <span data-i18n="aadhaar_q5_c">Electricity bill</span></label>
+        <label><input type="radio" name="q5" value="d" /> <span data-i18n="aadhaar_q5_d">Passport</span></label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p><span data-i18n="aadhaar_q6">6. eKYC can help in:</span></p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q6" value="a" /> <span data-i18n="aadhaar_q6_a">Making food</span></label>
+        <label><input type="radio" name="q6" value="b" /> <span data-i18n="aadhaar_q6_b">Accessing subsidies</span></label>
+        <label><input type="radio" name="q6" value="c" /> <span data-i18n="aadhaar_q6_c">Playing games</span></label>
+        <label><input type="radio" name="q6" value="d" /> <span data-i18n="aadhaar_q6_d">Making resumes</span></label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p><span data-i18n="aadhaar_q7">7. Who provides eKYC?</span></p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q7" value="a" /> <span data-i18n="aadhaar_q7_a">UIDAI</span></label>
+        <label><input type="radio" name="q7" value="b" /> <span data-i18n="aadhaar_q7_b">Facebook</span></label>
+        <label><input type="radio" name="q7" value="c" /> <span data-i18n="aadhaar_q7_c">Private agencies</span></label>
+        <label><input type="radio" name="q7" value="d" /> <span data-i18n="aadhaar_q7_d">WhatsApp</span></label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p><span data-i18n="aadhaar_q8">8. Can eKYC be used without internet?</span></p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q8" value="a" /> <span data-i18n="aadhaar_q8_a">No</span></label>
+        <label><input type="radio" name="q8" value="b" /> <span data-i18n="aadhaar_q8_b">Yes</span></label>
+        <label><input type="radio" name="q8" value="c" /> <span data-i18n="aadhaar_q8_c">Only in hospitals</span></label>
+        <label><input type="radio" name="q8" value="d" /> <span data-i18n="aadhaar_q8_d">Only in cities</span></label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p><span data-i18n="aadhaar_q9">9. Is OTP required for Aadhaar eKYC?</span></p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q9" value="a" /> <span data-i18n="aadhaar_q9_a">No</span></label>
+        <label><input type="radio" name="q9" value="b" /> <span data-i18n="aadhaar_q9_b">Yes</span></label>
+        <label><input type="radio" name="q9" value="c" /> <span data-i18n="aadhaar_q9_c">Only sometimes</span></label>
+        <label><input type="radio" name="q9" value="d" /> <span data-i18n="aadhaar_q9_d">Not mandatory</span></label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p><span data-i18n="aadhaar_q10">10. Aadhaar eKYC helps in:</span></p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q10" value="a" /> <span data-i18n="aadhaar_q10_a">Getting a driver's license</span></label>
+        <label><input type="radio" name="q10" value="b" /> <span data-i18n="aadhaar_q10_b">Digital identity verification</span></label>
+        <label><input type="radio" name="q10" value="c" /> <span data-i18n="aadhaar_q10_c">Finding hotels</span></label>
+        <label><input type="radio" name="q10" value="d" /> <span data-i18n="aadhaar_q10_d">Checking weather</span></label>
+      </div>
+    </div>
+
+    <button type="submit" class="cta-btn" data-i18n="submit_quiz">Submit Quiz</button>
+  </form>
+
+  <div id="quizResult" class="quiz-result"></div>
+</main>
+
+  <!-- ✅ Quiz Logic -->
+  <script>
+document.getElementById('quizForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const correctAnswers = {
+  q1: 'b',
+  q2: 'b',
+  q3: 'c',
+  q4: 'b',
+  q5: 'b',
+  q6: 'b',
+  q7: 'a',
+  q8: 'a',
+  q9: 'b',
+  q10: 'b'
+};
+
+
+  const allKeys = Object.keys(correctAnswers);
+  const answersArray = [];
+
+  let score = 0;
+
+  allKeys.forEach((qKey) => {
+    const selected = document.querySelector(`input[name="${qKey}"]:checked`);
+    const selectedValue = selected ? selected.value : null;
+    answersArray.push(selectedValue !== null ? ['a', 'b', 'c', 'd'].indexOf(selectedValue) : -1);
+
+    if (selectedValue === correctAnswers[qKey]) score++;
+  });
+
+  const passing = Math.ceil(allKeys.length * 0.7);
+  const result = document.getElementById('quizResult');
+
+  try {
+    const res = await fetch('http://localhost:3001/api/quiz/submit', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        module: 'aadhaar',
+        answers: answersArray
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      if (score >= passing) {
+        result.innerHTML = `✅ You passed! Score: ${score}/${allKeys.length}<br><a href='../certificate.html?module=aadhaar' class='cta-btn'>Download Certificate</a>`;
+      // ✅ Mark Aadhaar module as completed
+const completeRes = await fetch('http://localhost:3001/api/user/complete', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ moduleName: 'aadhaar' })
+});
+
+const completeData = await completeRes.json();
+if (!completeRes.ok) {
+  console.warn('⚠️ Failed to mark Aadhaar module complete:', completeData.message);
+}
+      } else {
+        result.innerHTML = `❌ You did not pass. Score: ${score}/${allKeys.length}`;
+      }
+    } else {
+      result.innerHTML = '❌ Submission failed: ' + data.message;
+    }
+
+  } catch (err) {
+    console.error('Error submitting quiz:', err);
+    result.innerHTML = '⚠️ Error submitting quiz. Try again.';
+  }
+
+  result.scrollIntoView({ behavior: "smooth" });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="verify_aadhaar_title">Verify Aadhaar | DigiLocker Demo</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/digilocker.css" />
+  <script src="../../js/i18n.js" defer></script>
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="digilocker_login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="digilocker-page">
+    <div class="digilocker-card">
+      <h2><span data-i18n="verify_aadhaar_heading">Verify your Identity</span></h2>
+      <p class="helper-text"><span data-i18n="verify_aadhaar_instruction">Enter your Aadhaar number to proceed</span></p>
+
+      <form id="aadhaarForm" class="upload-form">
+        <input 
+          id="aadhaarInput" 
+          type="text" 
+          placeholder="Enter your Aadhaar" 
+          maxlength="12" 
+          pattern="\d{12}" 
+          required 
+          class="file-input" 
+          data-i18n-placeholder="aadhaar_placeholder" 
+        />
+        <button type="submit" class="continue-btn enabled" data-i18n="verify_btn">Verify</button>
+      </form>
+
+      <p id="displayOtp" style="margin-top: 1rem; color: #444; font-weight: bold;"></p>
+
+      <div style="margin-top: 2rem; padding: 1rem; background-color: #f8f4ff; border-radius: 10px;">
+        <h4 style="margin-bottom: 0.5rem;"><span data-i18n="verify_aadhaar_benefits_heading">Benefits of verification</span></h4>
+        <ul style="list-style: none; padding-left: 0; margin: 0;">
+          <li><span data-i18n="verify_aadhaar_benefit_1">✅ Access to authentic documents</span></li>
+          <li><span data-i18n="verify_aadhaar_benefit_2">✅ Enhance security & additional login options</span></li>
+          <li><span data-i18n="verify_aadhaar_benefit_3">✅ Assign nominee for secure assets</span></li>
+          <li><span data-i18n="verify_aadhaar_benefit_4">✅ eSign your documents stored in DigiLocker</span></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- JS -->
+  <script>
+    document.getElementById("aadhaarForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const aadhaar = document.getElementById("aadhaarInput").value.trim();
+      const displayOtp = document.getElementById("displayOtp");
+
+      if (!/^\d{12}$/.test(aadhaar)) {
+        alert("Please enter a valid 12-digit Aadhaar number.");
+        return;
+      }
+
+      try {
+        const res = await fetch("http://localhost:3001/api/digilocker/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phoneNumber: aadhaar })  // ✅ match backend key
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem("lastSentOtp", data.otp); // for digilocker_otp.html
+          localStorage.setItem("digilocker_phone", aadhaar);
+          displayOtp.textContent = `🟢 OTP: ${data.otp}`;  // show to user
+          setTimeout(() => window.location.href = "digilocker_otp.html", 1500);  // navigate
+        } else {
+          alert(data.message || "Failed to send OTP.");
+        }
+      } catch (err) {
+        console.error("OTP send error:", err);
+        alert("Server error. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>

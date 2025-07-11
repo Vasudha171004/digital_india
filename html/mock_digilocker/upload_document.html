@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="upload_title">Upload Document | DigiLocker Demo</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/digilocker.css" />
+  <script src="../../js/i18n.js" defer></script>
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="../../html/login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../../html/home.html" data-i18n="nav_home">Home</a>
+    <a href="../../html/courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="../../html/quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../../html/certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="../../html/dashboard.html" class="active" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <main class="digilocker-page">
+    <div class="digilocker-card">
+      <h2><span data-i18n="upload_heading">Upload Document</span></h2>
+      <p class="helper-text"><span data-i18n="upload_instruction">Select a file to upload to your DigiLocker.</span></p>
+
+      <form class="upload-form">
+        <label for="fileUpload" class="file-label" data-i18n="upload_label">Choose a file:</label>
+        <input type="file" id="fileUpload" accept="image/*,.pdf" class="file-input" />
+        <button type="submit" class="continue-btn enabled" style="margin-top: 1rem;" data-i18n="upload_button">Upload</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+function getDigiHeaders() {
+  return {
+    'Authorization': `Bearer ${localStorage.getItem('digiToken')}`
+    // Note: Content-Type is auto-set when using FormData
+  };
+}
+
+document.querySelector("form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const fileInput = document.getElementById('fileUpload');
+  if (!fileInput.files.length) {
+    alert('Please choose a file first.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', fileInput.files[0]);
+
+  try {
+    const res = await fetch('http://localhost:3001/api/digilocker/upload', {
+      method: 'POST',
+      headers: getDigiHeaders(),
+      body: formData
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert('✅ ' + (data.message || 'Document uploaded successfully!'));
+      window.location.href = "my_documents.html";
+    } else {
+      alert(data.message || '❌ Upload failed');
+    }
+  } catch (err) {
+    console.error('Upload error:', err);
+    alert('⚠️ Error uploading. Try again.');
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="login_title_full">Login | Digital India Access Training</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/i18n.js" defer></script>
+  <link rel="icon" href="../images/india.png" type="image/png"/>
+</head>
+<body class="login-body">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="select_language" data-i18n="select_language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="register.html" class="login-btn" data-i18n="register">Register</a>
+    </div>
+  </div>
+
+  <!-- Login Card -->
+  <main class="login-container">
+    <div class="login-card">
+      <h2 data-i18n="login_heading">Welcome Back!</h2>
+      <p data-i18n="login_subtext">Please log in to continue</p>
+
+      <form id="loginForm">
+        <label for="email" data-i18n="login_email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email" data-i18n="login_email_placeholder" />
+
+        <label for="password" data-i18n="login_password">Password</label>
+        <div style="position: relative;">
+          <input type="password" id="password" name="password" required placeholder="Enter password" data-i18n="login_password_placeholder" />
+          <span onclick="togglePassword()" style="position:absolute; right:10px; top:10px; cursor:pointer;">👁️</span>
+        </div>
+
+        <div class="login-options">
+          <label><input type="checkbox" id="rememberMe" /> <span data-i18n="remember_me">Remember Me</span></label>
+          <a href="#" data-i18n="forgot_password">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="login-btn-submit" data-i18n="login">Login</button>
+      </form>
+
+      <p class="register-link">
+        <span data-i18n="no_account">Don’t have an account?</span>
+        <a href="register.html" data-i18n="register">Register</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- Script -->
+  <script>
+    function togglePassword() {
+      const input = document.getElementById("password");
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      try {
+        const res = await fetch('http://localhost:3001/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          // ✅ Store token and user details
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('userDetails', JSON.stringify(data.user));
+
+          alert('✅ Login successful!');
+          window.location.href = 'dashboard.html';
+        } else {
+          alert(data.message || '❌ Login failed');
+        }
+      } catch (err) {
+        console.error('Login error:', err);
+        alert('Server error. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

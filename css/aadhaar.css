@@ -1,0 +1,416 @@
+/*------------------------------------------------
+  Aadhaar + Portal Integrated Stylesheet (UIDAI Matching)
+------------------------------------------------*/
+
+/*=============== COLOR PALETTE ===============*/
+:root {
+  --aadhaar-deep-blue: #003366;
+  --aadhaar-cyan: #00bcd4;
+  --aadhaar-gray: #777;
+  --aadhaar-light-gray: #d1d1d1;
+  --aadhaar-bg: #f2f2f2;
+  --aadhaar-border: #ccc;
+  --aadhaar-text: #333;
+  --aadhaar-white: #ffffff;
+}
+
+/*=============== BASE STYLES ===============*/
+body {
+  background-color: var(--aadhaar-bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/*=============== HERO SECTION ===============*/
+.aadhaar-hero {
+  background: linear-gradient(to right, #0a2d5f, #083b7b);
+  color: #fff;
+  padding: 60px 20px 100px;
+  text-align: center;
+}
+
+.aadhaar-hero h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.aadhaar-hero p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/*=============== PAGE WRAPPER ===============*/
+.aadhaar-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 160px);
+  padding: 3rem 1rem;
+  box-sizing: border-box;
+}
+
+.aadhaar-section {
+  max-width: 700px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/*=============== CARD (Login / Generic) ===============*/
+.aadhaar-login-card {
+  background-color: var(--aadhaar-white);
+  max-width: 420px;
+  width: 100%;
+  padding: 30px 25px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--aadhaar-border);
+  margin: 0 auto;
+}
+
+.aadhaar-login-card img {
+  width: 55px;
+  margin-bottom: 15px;
+}
+
+.aadhaar-login-card h3 {
+  font-size: 1.3rem;
+  color: var(--aadhaar-text);
+  margin: 10px 0 20px;
+  font-weight: bold;
+}
+
+.aadhaar-login-card p {
+  font-size: 0.95rem;
+  color: var(--aadhaar-gray);
+  margin-bottom: 20px;
+}
+
+/*=============== INPUT STYLES ===============*/
+.aadhaar-input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid var(--aadhaar-border);
+  margin: 12px 0;
+  color: var(--aadhaar-text);
+  background: transparent;
+  transition: border-color 0.3s;
+}
+
+.aadhaar-input:focus {
+  outline: none;
+  border-bottom-color: var(--aadhaar-deep-blue);
+}
+
+.aadhaar-input[readonly] {
+  background-color: #f5f5f5;
+  color: #444;
+  border-bottom: 2px solid var(--aadhaar-border);
+  cursor: not-allowed;
+}
+
+/*=============== CAPTCHA ===============*/
+.captcha-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.captcha-code {
+  background-color: var(--aadhaar-white);
+  border: 1px solid var(--aadhaar-border);
+  font-family: monospace;
+  font-size: 1rem;
+  padding: 8px 14px;
+  border-radius: 3px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+}
+
+.captcha-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #333;
+  padding: 4px;
+  transition: transform 0.2s;
+}
+
+.captcha-btn:hover {
+  transform: scale(1.2);
+}
+
+/*=============== OTP INPUT ===============*/
+#otpInput {
+  letter-spacing: 4px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/*=============== BUTTONS ===============*/
+.aadhaar-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  margin-top: 20px;
+  border-radius: 4px;
+  border: none;
+  background: var(--aadhaar-light-gray);
+  color: white;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+}
+
+.aadhaar-btn.active {
+  background: linear-gradient(to right, var(--aadhaar-deep-blue), var(--aadhaar-cyan));
+  cursor: pointer;
+}
+
+.btn-back {
+  border: 1px solid var(--aadhaar-deep-blue);
+  background: white;
+  color: var(--aadhaar-deep-blue);
+}
+
+.btn-download {
+  background: linear-gradient(to right, var(--aadhaar-deep-blue), var(--aadhaar-cyan));
+  color: white;
+}
+
+/*=============== STATUS / VALIDATION ===============*/
+.valid-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: green;
+  font-size: 0.95rem;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.valid-message span {
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  color: var(--aadhaar-gray);
+  margin-top: 18px;
+}
+
+/*=============== DASHBOARD STYLES ===============*/
+.aadhaar-dashboard {
+  padding: 2rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.dashboard-heading {
+  font-size: 1.8rem;
+  color: var(--aadhaar-deep-blue);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.service-card {
+  background-color: white;
+  border: 1px solid var(--aadhaar-border);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s;
+  cursor: pointer;
+  text-align: center;
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+}
+
+.service-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--aadhaar-deep-blue);
+}
+
+.service-card p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--aadhaar-gray);
+}
+
+.service-card img {
+  width: 40px;
+  margin-bottom: 10px;
+}
+
+/*=============== DOWNLOAD SECTION ===============*/
+.download-section {
+  max-width: 700px;
+  margin: 2rem auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.download-section h2 {
+  color: var(--aadhaar-deep-blue);
+  margin-bottom: 1rem;
+}
+
+.masked-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.aadhaar-info {
+  border-top: 1px dashed #ccc;
+  padding-top: 1rem;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.aadhaar-info label {
+  font-weight: bold;
+  color: #333;
+}
+
+.aadhaar-info span {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.download-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.download-buttons button {
+  padding: 10px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/*=============== FIELD SELECTION (Address) ===============*/
+.field-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 30px 0;
+  gap: 15px;
+}
+
+.field-box {
+  padding: 20px;
+  width: 200px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.field-box small {
+  display: block;
+  font-size: 0.8rem;
+  margin-top: 6px;
+  color: #555;
+}
+
+.field-box.selected {
+  background: #e0f7fa;
+  border-color: #00acc1;
+  color: #006064;
+}
+
+.field-box.disabled {
+  background: #eee;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.supporting-link {
+  font-size: 0.9rem;
+  margin: 20px 0;
+}
+
+/*=============== ADDRESS FORM ===============*/
+.aadhaar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.aadhaar-form label {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: var(--aadhaar-text);
+}
+
+.aadhaar-form input[type="text"],
+.aadhaar-form input[type="file"],
+.aadhaar-form select {
+  padding: 10px;
+  border: 1px solid var(--aadhaar-border);
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fff;
+}
+
+/*=============== ADDRESS PREVIEW ===============*/
+.address-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.address-box {
+  flex: 1 1 48%;
+  background: #f7f7f7;
+  border: 1px solid var(--aadhaar-border);
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.address-box h3 {
+  margin-top: 0;
+  color: var(--aadhaar-deep-blue);
+  font-size: 1.1rem;
+}
+
+.address-box p {
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}

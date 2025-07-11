@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="aadhaar_login_title">Aadhaar Login | Digital India Access Training</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/aadhaar.css" />
+  <link rel="icon" href="../../images/india.png" type="image/png"/>
+  <script src="../../js/i18n.js" defer></script>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="../dashboard.html" class="active" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Aadhaar Login UI -->
+  <section class="aadhaar-page">
+    <div class="aadhaar-login-card">
+      <img src="https://img.icons8.com/ios-filled/100/fingerprint.png" alt="Fingerprint Icon" style="width: 50px; margin-bottom: 15px;">
+      <h3 data-i18n="aadhaar_login_heading">Login with Aadhaar and OTP</h3>
+      <p data-i18n="aadhaar_login_instruction">Enter your Aadhaar number and Captcha to simulate OTP login.</p>
+
+      <input type="text" class="aadhaar-input" id="aadhaarInput" placeholder="Enter Aadhaar Number" data-i18n-placeholder="aadhaar_input_placeholder" />
+
+      <div class="captcha-box">
+        <input type="text" class="aadhaar-input" id="captchaInput" placeholder="Enter Captcha" data-i18n-placeholder="captcha_input_placeholder" />
+
+        <div class="captcha-code" id="captchaCode" title="Click to refresh">A8F4X</div>
+
+        <button class="captcha-btn" onclick="readCaptcha()" title="Read out captcha">🔊</button>
+        <button class="captcha-btn" onclick="generateCaptcha()" title="Reload captcha">🔄</button>
+      </div>
+
+      <button class="aadhaar-btn" id="loginBtn" disabled data-i18n="aadhaar_login_button">Login with OTP</button>
+
+      <p class="disclaimer" data-i18n="aadhaar_login_disclaimer">This is a mock training screen. No real data is collected.</p>
+    </div>
+  </section>
+
+  <!-- Script Section -->
+  <script>
+  function generateCaptcha() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let captcha = '';
+    for (let i = 0; i < 5; i++) {
+      captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    document.getElementById('captchaCode').textContent = captcha;
+  }
+
+  function readCaptcha() {
+    const captcha = document.getElementById('captchaCode').textContent;
+    const utterance = new SpeechSynthesisUtterance(captcha.split('').join(' '));
+    utterance.lang = 'en-IN';
+    utterance.rate = 0.9;
+    speechSynthesis.speak(utterance);
+  }
+
+  function checkFilled() {
+    const aadhaarInput = document.getElementById('aadhaarInput');
+    const captchaInput = document.getElementById('captchaInput');
+    const loginBtn = document.getElementById('loginBtn');
+
+    if (aadhaarInput.value.length === 12 && captchaInput.value.trim().length > 0) {
+      loginBtn.classList.add('active');
+      loginBtn.disabled = false;
+    } else {
+      loginBtn.classList.remove('active');
+      loginBtn.disabled = true;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    generateCaptcha();
+
+    document.getElementById('captchaCode').addEventListener('click', generateCaptcha);
+    document.getElementById('aadhaarInput').addEventListener('input', checkFilled);
+    document.getElementById('captchaInput').addEventListener('input', checkFilled);
+
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      const aadhaar = document.getElementById('aadhaarInput').value.trim();
+      const captchaText = document.getElementById('captchaCode').textContent;
+
+      try {
+        const res = await fetch('http://localhost:3001/api/aadhaar/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ aadhaarNumber: aadhaar })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+  localStorage.setItem('aadhaarNumber', document.getElementById('aadhaarInput').value.trim());
+  localStorage.setItem('aadhaarCaptcha', document.getElementById('captchaInput').value.trim());
+  localStorage.setItem('aadhaarOtp', data.otp);
+  localStorage.setItem('generatedCaptcha', document.getElementById('captchaCode').textContent);
+  localStorage.setItem('enteredCaptcha', document.getElementById('captchaInput').value.trim());
+  window.location.href = 'aadhaar_otp.html';
+} else {
+          alert(data.message || 'Failed to send OTP');
+        }
+      } catch (err) {
+        console.error('Error:', err);
+        alert('Server error. Try again.');
+      }
+    });
+  });
+</script>
+</body>
+</html>

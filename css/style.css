@@ -1,0 +1,583 @@
+/* ---------------------------------- */
+/* Root Variables & Global Styles     */
+/* ---------------------------------- */
+:root {
+  --bureau-maroon: #800000;
+  --bureau-cream: #FFF8E1;
+  --bureau-steelblue: #4682B4;
+  --bureau-charcoal: #333333;
+  --bureau-palegrey: #F5F5F5;
+
+  --di-navy: var(--bureau-maroon);
+  --di-deep-navy: var(--bureau-charcoal);
+  --di-saffron: var(--bureau-steelblue);
+  --di-green: #1E8A43;
+  --di-grey: var(--bureau-charcoal);
+  --di-white: #FFFFFF;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&family=Roboto&display=swap');
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bureau-palegrey);
+  color: var(--di-grey);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+/* ---------------------------------- */
+/* Top Bar & Header                   */
+/* ---------------------------------- */
+.top-bar {
+  background-color: var(--bureau-maroon);
+  color: var(--di-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 20px;
+  font-size: 0.9rem;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.top-right select {
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: none;
+  font-size: 0.9rem;
+}
+
+.login-btn {
+  background-color: var(--di-white);
+  color: var(--bureau-maroon);
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+.login-btn:hover {
+  background-color: #e6ecf5;
+}
+
+.full-width-header {
+  background-color: var(--bureau-maroon);
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.site-logo {
+  height: 60px;
+}
+
+.header-title {
+  color: var(--di-white);
+  margin-left: 15px;
+}
+.header-title h1 {
+  font-size: 1.6rem;
+  margin: 0;
+}
+.header-title p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* ---------------------------------- */
+/* Navigation                         */
+/* ---------------------------------- */
+.main-nav {
+  background-color: var(--bureau-cream);
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 12px 0;
+  font-weight: bold;
+  color: var(--di-deep-navy);
+}
+.main-nav a {
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+.main-nav a.active {
+  background-color: var(--bureau-steelblue);
+  color: var(--di-white);
+}
+
+/* ---------------------------------- */
+/* Carousel / Banner Section          */
+/* ---------------------------------- */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 6;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 0;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-text {
+  position: absolute;
+  bottom: 12%;
+  left: 8%;
+  color: white;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+.banner-text h2 {
+  font-size: 2rem;
+  margin: 0;
+}
+.banner-text p {
+  font-size: 1.1rem;
+}
+
+/* ---------------------------------- */
+/* Cards (Courses, Quiz, Highlights)  */
+/* ---------------------------------- */
+.highlights, .quiz-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 50px 20px;
+}
+
+.card {
+  background-color: var(--di-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.course-icon {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+.card h3 {
+  font-size: 1.2rem;
+  color: var(--bureau-maroon);
+  margin-bottom: 10px;
+}
+.card p {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 16px;
+}
+
+/* ---------------------------------- */
+/* Buttons                            */
+/* ---------------------------------- */
+.cta-btn,
+.login-btn-submit {
+  background-color: var(--bureau-steelblue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.cta-btn:hover,
+.login-btn-submit:hover {
+  background-color: #37658a;
+}
+
+/* ---------------------------------- */
+/* Quiz Layout                        */
+/* ---------------------------------- */
+.quiz-box {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+.quiz-title {
+  text-align: center;
+  color: var(--bureau-maroon);
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.quiz-question {
+  font-weight: 600;
+}
+.quiz-options label {
+  display: block;
+  padding: 10px 14px;
+  margin-top: 8px;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.quiz-options input[type="radio"] {
+  margin-right: 8px;
+}
+.quiz-options label:hover {
+  background-color: #dde9f4;
+}
+.quiz-result {
+  margin-top: 2rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.quiz-selection-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* ---------------------------------- */
+/* Certificate Page                   */
+/* ---------------------------------- */
+.simple-certificate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background-color: #f0f0f5;
+}
+
+.certificate-box {
+  background: #fffbea url('../images/certificate_border.png') no-repeat center center;
+  background-size: 100% 100%;
+  padding: 80px 60px;
+  max-width: 850px;
+  width: 100%;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  margin: 40px auto; /* ✅ NEW: centers the box */
+}
+
+.cert-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+.cert-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.2rem;
+  font-weight: normal;
+  color: #1a237e;
+  margin: 20px 0 10px;
+}
+
+.cert-module {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: #0d47a1;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.cert-date {
+  font-style: italic;
+  color: #555;
+  margin-top: 10px;
+}
+
+.cert-line {
+  margin: 20px auto;
+  font-size: 1rem;
+  color: #444;
+  max-width: 600px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.cert-footer {
+  margin-top: 40px;
+  font-size: 0.95rem;
+  color: #444;
+  font-weight: 500;
+  border-top: 1px dashed #aaa;
+  padding-top: 10px;
+}
+
+.download-btn {
+  margin-top: 30px;
+  background-color: var(--bureau-steelblue);
+  color: white;
+  padding: 10px 26px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.download-btn:hover {
+  background-color: #37658a;
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  .certificate {
+    background-color: #fef6e4 !important; /* your light yellow */
+    color: #000 !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+@keyframes wipeDown {
+  0% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+.certificate-box {
+  animation: wipeDown 2.5s ease-out forwards;
+}
+/* ---------------------------------- */
+/* Responsive Design                  */
+/* ---------------------------------- */
+@media (max-width: 768px) {
+  .main-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .highlights {
+    flex-direction: column;
+    align-items: center;
+  }
+  .full-width-header,
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+}
+
+/* ---------------------------------- */
+/* Animation                          */
+/* ---------------------------------- */
+.pulse-animation {
+  animation: pulse 2s infinite;
+  width: 60px;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------- */
+/* Login/Register Shared Styles       */
+/* ---------------------------------- */
+.login-body {
+  background: linear-gradient(to right, #f9f9f9, #e9ecf0);
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 1rem;
+}
+
+.login-card {
+  background: white;
+  padding: 2.5rem 3rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: var(--bureau-maroon);
+}
+
+.login-card p {
+  margin-bottom: 1.5rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+
+.login-card label {
+  font-weight: 600;
+  color: #333;
+}
+
+.login-card input[type="text"],
+.login-card input[type="email"],
+.login-card input[type="password"],
+.login-card input[type="tel"] {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.register-link,
+.form-note {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.register-link a,
+.form-note a {
+  color: var(--bureau-steelblue);
+  font-weight: 600;
+  text-decoration: none;
+}
+.progress-wrapper {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 24px;
+  margin-bottom: 16px; /* 🔥 Add space below the bar */
+  display: flex;
+  align-items: center;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  line-height: 24px;
+  transition: width 0.3s ease;
+}
+
+.progress-bar-fill.completed {
+  background-color: #28a745;
+}
+.certificate-box {
+  background-color: #fffbea !important;
+  color: #000 !important;
+  background-image: url('../images/certificate_border.png') !important;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+.cert-title,
+.cert-name,
+.cert-module,
+.cert-line,
+.cert-footer,
+.cert-date {
+  color: #000 !important;
+  font-weight: bold !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.otp-box {
+  background: #f0f0ff;
+  border: 1px dashed #7b61ff;
+  padding: 10px;
+  margin-top: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 600;
+  color: #4b2ee3;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="aadhaar_downloaded_title">Aadhaar Downloaded | Digital India Access Training</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/aadhaar.css" />
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+  <script src="../../js/i18n.js" defer></script>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="select_language" data-i18n="select_language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo" data-i18n="logo_alt" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="aadhaar_dashboard.html" class="active" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Success Message -->
+  <section class="download-section" style="text-align: center;">
+    <img src="https://img.icons8.com/ios-filled/100/00b894/ok--v1.png" alt="Success" width="80" />
+    <h2 style="margin-top: 15px;" data-i18n="aadhaar_success_heading">Congratulations !!!</h2>
+    <p data-i18n="aadhaar_success_text">Your Aadhaar card has been successfully downloaded.</p>
+
+    <div class="aadhaar-info" style="text-align: left; margin-top: 30px;">
+      <p><strong data-i18n="aadhaar_password_label">The Aadhaar PDF password will be 8 characters:</strong></p>
+      <p data-i18n="aadhaar_password_rule">First 4 letters of your name in CAPITAL + Year of Birth</p>
+      <p data-i18n="aadhaar_password_example"><em>Example:</em> If your name is <strong>ANISH</strong> and DOB is <strong>1989</strong>, your password is <strong>ANIS1989</strong></p>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <button class="btn-download" onclick="window.location.href='aadhaar_dashboard.html'" data-i18n="go_to_dashboard">Go To Dashboard</button>
+    </div>
+  </section>
+
+</body>
+</html>

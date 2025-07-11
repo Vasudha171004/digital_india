@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title data-i18n="dl_pin_title">DigiLocker: Security PIN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../css/digilocker.css" />
+  <script src="../../js/i18n.js" defer></script>
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="../dashboard.html" class="active" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Main Content -->
+  <section class="digilocker-page">
+    <div class="digilocker-card">
+      <h2><span data-i18n="dl_pin_heading">Enter 6 digit security PIN</span></h2>
+      <div class="otp-inputs">
+        <input type="password" maxlength="1" aria-label="PIN Digit 1" />
+        <input type="password" maxlength="1" aria-label="PIN Digit 2" />
+        <input type="password" maxlength="1" aria-label="PIN Digit 3" />
+        <input type="password" maxlength="1" aria-label="PIN Digit 4" />
+        <input type="password" maxlength="1" aria-label="PIN Digit 5" />
+        <input type="password" maxlength="1" aria-label="PIN Digit 6" />
+        <span class="toggle-pin" role="button" aria-label="Toggle PIN visibility">&#128065;</span>
+      </div>
+      <a class="trouble" href="#" data-i18n="dl_pin_forgot">Forgot security PIN?</a>
+      <button class="continue-btn enabled" data-i18n="dl_pin_button">Verify</button>
+<p id="displayOtp" style="margin-top: 1rem; color: #444; font-weight: bold;"></p>
+    </div>
+  </section>
+
+  <!-- PIN Behavior Script -->
+  <script>
+  const pinInputs = document.querySelectorAll('.otp-inputs input');
+  const toggleBtn = document.querySelector('.toggle-pin');
+
+  // Toggle PIN visibility
+  toggleBtn.addEventListener('click', () => {
+    const isPassword = pinInputs[0].type === 'password';
+    pinInputs.forEach(input => input.type = isPassword ? 'text' : 'password');
+  });
+
+  // Auto-focus to next input
+  pinInputs.forEach((input, idx) => {
+    input.addEventListener('input', () => {
+      if (input.value && idx < pinInputs.length - 1) {
+        pinInputs[idx + 1].focus();
+      }
+    });
+  });
+
+  // Handle Continue button click to send OTP
+  document.querySelector('.continue-btn').addEventListener('click', async function () {
+    try {
+      const res = await fetch("http://localhost:3001/api/digilocker/login", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phoneNumber: localStorage.getItem('digilocker_phone') })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem('lastSentOtp', data.otp); // 🟢 Save OTP for display
+        window.location.href = "digilocker_otp.html";
+      } else {
+        alert(data.message || 'OTP sending failed');
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Server error");
+    }
+  });
+</script>

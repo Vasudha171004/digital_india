@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="ehospital_demo_title">eHospital Demo | Digital India Access Training</title>
+
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/ehospital.css" />
+  <script src="../../js/i18n.js" defer></script>
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+  <link href="https://img1.digitallocker.gov.in/digilocker-landing-page/assets/fontawesome/css/all.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" class="active" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="../dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="ehosp-hero">
+    <h2 data-i18n="eh_demo_welcome">Welcome to eHospital</h2>
+    <p data-i18n="eh_demo_description">This demo simulates the national digital health ecosystem including OPD, appointment booking, and ABHA integration.</p>
+  </section>
+
+  <!-- eHospital Modules -->
+  <section class="ehosp-cards">
+
+    <a href="ehospital_appointment.html" class="ehosp-card">
+      <h4><i class="fas fa-user-plus"></i> <span data-i18n="eh_demo_card1_title">Patient Registration (OPD & Appointments)</span></h4>
+      <p data-i18n="eh_demo_card1_desc">Register for outpatient departments or casualty with the ability to book, reschedule, or cancel appointments digitally.</p>
+    </a>
+
+    <a href="ehospital_ipd.html" class="ehosp-card">
+      <h4><i class="fas fa-bed"></i> <span data-i18n="eh_demo_card2_title">Admission, Discharge & Transfer (IPD)</span></h4>
+      <p data-i18n="eh_demo_card2_desc">Simulate in-patient admission and manage services like treatment, discharge and ward transfer during a hospital stay.</p>
+    </a>
+
+    <a href="ehospital_lab.html" class="ehosp-card">
+      <h4><i class="fas fa-vial"></i> <span data-i18n="eh_demo_card3_title">Lab Reports & Diagnostics</span></h4>
+      <p data-i18n="eh_demo_card3_desc">Generate or view sample lab reports as a part of the eHospital record integration with ABHA health IDs.</p>
+    </a>
+
+  </section>
+</body>
+</html>

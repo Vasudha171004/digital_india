@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="quiz_ehospital_title">Quiz | eHospital Module</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <script src="../../js/i18n.js" defer></script>
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="te">తెలుగు</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" class="active" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="../dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Quiz Content -->
+  <main class="quiz-box">
+    <h2 class="quiz-title" data-i18n="ehospital_quiz_heading">eHospital Module Quiz</h2>
+    <form id="quizForm" class="quiz-form">
+
+     <div class="quiz-question">
+  <p data-i18n="ehq1">1. What can you book through eHospital?</p>
+  <div class="quiz-options">
+    <label><input type="radio" name="q1" value="a" /> <span data-i18n="ehq1a">Movie Tickets</span></label>
+    <label><input type="radio" name="q1" value="b" /> <span data-i18n="ehq1b">Hospital Appointments</span></label>
+    <label><input type="radio" name="q1" value="c" /> <span data-i18n="ehq1c">Bus Passes</span></label>
+    <label><input type="radio" name="q1" value="d" /> <span data-i18n="ehq1d">Exam Slots</span></label>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <p data-i18n="ehq2">2. Is eHospital a government initiative?</p>
+  <div class="quiz-options">
+    <label><input type="radio" name="q2" value="a" /> <span data-i18n="ehq2a">Yes</span></label>
+    <label><input type="radio" name="q2" value="b" /> <span data-i18n="ehq2b">No</span></label>
+    <label><input type="radio" name="q2" value="c" /> <span data-i18n="ehq2c">Not Sure</span></label>
+    <label><input type="radio" name="q2" value="d" /> <span data-i18n="ehq2d">Private NGO</span></label>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <p data-i18n="ehq3">3. Can you access lab reports through eHospital?</p>
+  <div class="quiz-options">
+    <label><input type="radio" name="q3" value="a" /> <span data-i18n="ehq3a">Yes</span></label>
+    <label><input type="radio" name="q3" value="b" /> <span data-i18n="ehq3b">No</span></label>
+    <label><input type="radio" name="q3" value="c" /> <span data-i18n="ehq3c">Only in person</span></label>
+    <label><input type="radio" name="q3" value="d" /> <span data-i18n="ehq3d">Only with doctor's approval</span></label>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <p data-i18n="ehq4">4. What is required to use eHospital services?</p>
+  <div class="quiz-options">
+    <label><input type="radio" name="q4" value="a" /> <span data-i18n="ehq4a">Aadhaar Number</span></label>
+    <label><input type="radio" name="q4" value="b" /> <span data-i18n="ehq4b">PAN Card</span></label>
+    <label><input type="radio" name="q4" value="c" /> <span data-i18n="ehq4c">Passport</span></label>
+    <label><input type="radio" name="q4" value="d" /> <span data-i18n="ehq4d">Ration Card</span></label>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <p data-i18n="ehq5">5. eHospital is managed under which Digital India initiative?</p>
+  <div class="quiz-options">
+    <label><input type="radio" name="q5" value="a" /> <span data-i18n="ehq5a">DigiYatra</span></label>
+    <label><input type="radio" name="q5" value="b" /> <span data-i18n="ehq5b">eGovernance</span></label>
+    <label><input type="radio" name="q5" value="c" /> <span data-i18n="ehq5c">eHealth (NeHA)</span></label>
+    <label><input type="radio" name="q5" value="d" /> <span data-i18n="ehq5d">UMANG</span></label>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <p data-i18n="ehq6">6. What service can you not access via eHospital?</p>
+  <div class="quiz-options">
+    <label><input type="radio" name="q6" value="a" /> <span data-i18n="ehq6a">OPD Registration</span></label>
+    <label><input type="radio" name="q6" value="b" /> <span data-i18n="ehq6b">Lab Reports</span></label>
+    <label><input type="radio" name="q6" value="c" /> <span data-i18n="ehq6c">Housing Application</span></label>
+    <label><input type="radio" name="q6" value="d" /> <span data-i18n="ehq6d">Blood Availability</span></label>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <p data-i18n="ehq7">7. What is the role of Aadhaar in eHospital?</p>
+  <div class="quiz-options">
+    <label><input type="radio" name="q7" value="a" /> <span data-i18n="ehq7a">Identify patient for records</span></label>
+    <label><input type="radio" name="q7" value="b" /> <span data-i18n="ehq7b">Link to mobile number</span></label>
+    <label><input type="radio" name="q7" value="c" /> <span data-i18n="ehq7c">Pay bills online</span></label>
+    <label><input type="radio" name="q7" value="d" /> <span data-i18n="ehq7d">Generate voter ID</span></label>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <p data-i18n="ehq8">8. Which platform integrates eHospital services?</p>
+  <div class="quiz-options">
+    <label><input type="radio" name="q8" value="a" /> <span data-i18n="ehq8a">Digilocker</span></label>
+    <label><input type="radio" name="q8" value="b" /> <span data-i18n="ehq8b">Aarogya Setu</span></label>
+    <label><input type="radio" name="q8" value="c" /> <span data-i18n="ehq8c">UMANG</span></label>
+    <label><input type="radio" name="q8" value="d" /> <span data-i18n="ehq8d">BHIM</span></label>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <p data-i18n="ehq9">9. Who maintains the eHospital portal?</p>
+  <div class="quiz-options">
+    <label><input type="radio" name="q9" value="a" /> <span data-i18n="ehq9a">NIC (National Informatics Centre)</span></label>
+    <label><input type="radio" name="q9" value="b" /> <span data-i18n="ehq9b">UIDAI</span></label>
+    <label><input type="radio" name="q9" value="c" /> <span data-i18n="ehq9c">NHAI</span></label>
+    <label><input type="radio" name="q9" value="d" /> <span data-i18n="ehq9d">TRAI</span></label>
+  </div>
+</div>
+
+<div class="quiz-question">
+  <p data-i18n="ehq10">10. What is the benefit of online OPD booking?</p>
+  <div class="quiz-options">
+    <label><input type="radio" name="q10" value="a" /> <span data-i18n="ehq10a">Shorter hospital visits</span></label>
+    <label><input type="radio" name="q10" value="b" /> <span data-i18n="ehq10b">No need for health checkups</span></label>
+    <label><input type="radio" name="q10" value="c" /> <span data-i18n="ehq10c">Free lab tests</span></label>
+    <label><input type="radio" name="q10" value="d" /> <span data-i18n="ehq10d">Automatic insurance</span></label>
+  </div>
+</div>
+
+      <!-- Repeat for remaining questions with data-i18n... -->
+      <!-- Truncated here to save space since pattern is consistent -->
+
+      <button type="submit" class="cta-btn" data-i18n="submit_quiz">Submit Quiz</button>
+    </form>
+    <div id="quizResult" class="quiz-result"></div>
+  </main>
+
+<script>
+document.getElementById('quizForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const correctAnswers = {
+    q1: 'b', q2: 'a', q3: 'a', q4: 'a', q5: 'c',
+    q6: 'c', q7: 'a', q8: 'c', q9: 'a', q10: 'a'
+  };
+
+  const allKeys = Object.keys(correctAnswers);
+  const answersArray = [];
+
+  let score = 0;
+
+  allKeys.forEach((qKey) => {
+    const selected = document.querySelector(`input[name="${qKey}"]:checked`);
+    const selectedValue = selected ? selected.value : null;
+    answersArray.push(selectedValue !== null ? ['a', 'b', 'c', 'd'].indexOf(selectedValue) : -1);
+
+    if (selectedValue === correctAnswers[qKey]) score++;
+  });
+
+  const passing = Math.ceil(allKeys.length * 0.7);
+  const result = document.getElementById('quizResult');
+
+  try {
+    const res = await fetch('http://localhost:3001/api/quiz/submit', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        module: 'ehospital',
+        answers: answersArray
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      if (score >= passing) {
+        result.innerHTML = `✅ You passed! Score: ${score}/${allKeys.length}<br><a href='../certificate.html?module=ehospital' class='cta-btn'>Download Certificate</a>`;
+        // Mark module as complete
+  const completeRes = await fetch('http://localhost:3001/api/user/complete', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ moduleName: 'ehospital' })
+  });
+
+  const completeData = await completeRes.json();
+  if (!completeRes.ok) {
+    console.warn('⚠️ Failed to mark module complete:', completeData.message);
+  }
+} else {
+        result.innerHTML = `❌ You did not pass. Score: ${score}/${allKeys.length}`;
+      }
+    } else {
+      result.innerHTML = '❌ Submission failed: ' + data.message;
+    }
+
+  } catch (err) {
+    console.error('Error submitting quiz:', err);
+    result.innerHTML = '⚠️ Error submitting quiz. Try again.';
+  }
+
+  result.scrollIntoView({ behavior: "smooth" });
+});
+</script>
+</body>
+</html>

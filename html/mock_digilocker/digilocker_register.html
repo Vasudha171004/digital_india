@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="dl_register_title">Register | DigiLocker Demo</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/digilocker.css" />
+  <script src="../../js/i18n.js" defer></script>
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="digilocker_login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="../dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="digilocker-page">
+    <div class="digilocker-card">
+      <h2><span data-i18n="dl_register_heading">Enter Your Details</span></h2>
+      <p class="helper-text" data-i18n="dl_register_subtext">You can only access verified documents with Aadhaar-verified account.</p>
+
+      <form id="registerForm" class="upload-form">
+        <input type="text" placeholder="Full Name" data-i18n-placeholder="dl_register_name" required class="file-input" />
+
+        <div class="dob-selects" style="display: flex; gap: 10px; justify-content: space-between; width: 100%; max-width: 320px;">
+          <!-- Day -->
+          <select required class="file-input" name="day">
+            <option value="" disabled selected>Day</option>
+            <option>01</option><option>02</option><option>03</option><option>04</option><option>05</option>
+            <option>06</option><option>07</option><option>08</option><option>09</option><option>10</option>
+            <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+            <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
+            <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
+            <option>26</option><option>27</option><option>28</option><option>29</option><option>30</option>
+            <option>31</option>
+          </select>
+
+          <!-- Month -->
+          <select required class="file-input" name="month">
+            <option value="" disabled selected>Month</option>
+            <option>January</option><option>February</option><option>March</option>
+            <option>April</option><option>May</option><option>June</option>
+            <option>July</option><option>August</option><option>September</option>
+            <option>October</option><option>November</option><option>December</option>
+          </select>
+
+          <!-- Year -->
+          <select required class="file-input" name="year">
+            <option value="" disabled selected>Year</option>
+            <option>2005</option><option>2004</option><option>2003</option><option>2002</option><option>2001</option>
+            <option>2000</option><option>1999</option><option>1998</option><option>1997</option><option>1996</option>
+            <option>1995</option><option>1994</option><option>1993</option><option>1992</option><option>1991</option>
+            <option>1990</option><option>1989</option><option>1988</option><option>1987</option><option>1986</option>
+            <option>1985</option><option>1984</option><option>1983</option><option>1982</option><option>1981</option>
+            <option>1980</option><option>1979</option><option>1978</option><option>1977</option><option>1976</option>
+            <option>1975</option><option>1974</option><option>1973</option><option>1972</option><option>1971</option>
+            <option>1970</option><option>1969</option><option>1968</option><option>1967</option><option>1966</option>
+          </select>
+        </div>
+
+        <!-- Gender -->
+        <div style="margin-top: 0.8rem;">
+          <label><input type="radio" name="gender" required /> <span data-i18n="gender_male">Male</span></label>
+          <label style="margin-left: 15px;"><input type="radio" name="gender" /> <span data-i18n="gender_female">Female</span></label>
+          <label style="margin-left: 15px;"><input type="radio" name="gender" /> <span data-i18n="gender_other">Other</span></label>
+        </div>
+
+        <!-- Email -->
+        <input type="email" placeholder="Email ID" data-i18n-placeholder="dl_register_email" class="file-input" required />
+
+        <!-- Submit -->
+        <button type="submit" class="continue-btn enabled" data-i18n="dl_register_submit">Submit</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      window.location.href = "verify_aadhaar.html";
+    });
+  </script>
+
+</body>
+</html>

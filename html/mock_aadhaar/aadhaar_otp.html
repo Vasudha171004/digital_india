@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="aadhaar_otp_title">Enter OTP | Digital India Access Training</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/aadhaar.css" />
+  <link rel="icon" href="../../images/india.png" type="image/png"/>
+  <script src="../../js/i18n.js" defer></script>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="../dashboard.html" class="active" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- OTP UI -->
+  <section class="aadhaar-page">
+    <div class="aadhaar-login-card">
+      <h3 data-i18n="aadhaar_otp_heading">Login to Aadhaar via OTP</h3>
+
+      <input type="text" class="aadhaar-input" id="aadhaarInput" readonly />
+      <input type="text" class="aadhaar-input" id="captchaInput" readonly />
+
+      <div style="text-align: left; font-size: 0.9rem; color: green; margin-top: 10px;">
+        ✅ <span data-i18n="aadhaar_otp_captcha_valid">Valid Captcha</span><br>
+        <span style="color: black;" data-i18n="aadhaar_otp_success_msg">Successfully Generated One Time Password (OTP)</span>
+      </div>
+
+      <input type="text" class="aadhaar-input" id="otpInput" placeholder="Enter OTP" maxlength="6" data-i18n-placeholder="aadhaar_otp_placeholder" />
+
+      <p id="resendText" style="font-size: 0.85rem; color: #003366; margin-top: 6px;">
+        <span data-i18n="aadhaar_otp_resend_text">Resend otp in:</span> <span id="countdown">60</span> <span data-i18n="aadhaar_otp_seconds">seconds</span>
+      </p>
+
+      <button class="aadhaar-btn" id="otpLoginBtn" disabled data-i18n="aadhaar_otp_button">Login</button>
+
+      <p id="displayOtp" style="margin-top: 1rem; font-weight: bold; color: green;"></p>
+
+      <p class="disclaimer" data-i18n="aadhaar_otp_disclaimer">This is a training demo. No real authentication is happening.</p>
+    </div>
+  </section>
+
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const aadhaarInput = document.getElementById('aadhaarInput');
+    const captchaInput = document.getElementById('captchaInput');
+    const otpInput = document.getElementById('otpInput');
+    const otpLoginBtn = document.getElementById('otpLoginBtn');
+    const displayOtp = document.getElementById('displayOtp');
+    const countdownSpan = document.getElementById('countdown');
+
+    const aadhaar = localStorage.getItem('aadhaarNumber') || '';
+    const captcha = localStorage.getItem('aadhaarCaptcha') || '';
+    const otp = localStorage.getItem('aadhaarOtp');
+
+    aadhaarInput.value = aadhaar;
+    captchaInput.value = captcha;
+
+    if (otp) {
+      displayOtp.textContent = `🔐 Your OTP is: ${otp}`;
+    } else {
+      displayOtp.textContent = '⚠️ OTP not available.';
+      otpInput.disabled = true;
+    }
+
+    otpInput.addEventListener('input', () => {
+      if (otpInput.value.trim().length === 6) {
+        otpLoginBtn.classList.add('active');
+        otpLoginBtn.disabled = false;
+      } else {
+        otpLoginBtn.classList.remove('active');
+        otpLoginBtn.disabled = true;
+      }
+    });
+
+    otpLoginBtn.addEventListener('click', () => {
+      const enteredOtp = otpInput.value.trim();
+      if (enteredOtp === otp) {
+        alert('✅ OTP Verified (Mock). Proceeding...');
+        localStorage.removeItem('aadhaarNumber');
+        localStorage.removeItem('aadhaarCaptcha');
+        localStorage.removeItem('aadhaarOtp');
+        window.location.href = 'aadhaar_dashboard.html';
+      } else {
+        alert('❌ Incorrect OTP. Please try again.');
+      }
+    });
+
+    let timeLeft = 60;
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdownSpan.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        countdownSpan.textContent = '0';
+      }
+    }, 1000);
+  });
+</script>
+</body>
+</html>

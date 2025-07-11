@@ -1,0 +1,132 @@
+<!-- Replace the original HTML with this updated version -->
+<!-- Updates include: removed Services tab, added data-i18n spans -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="aadhaar_title">Aadhaar eKYC Demo | Digital India Access Training</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <script src="../../js/i18n.js" defer></script>
+  <link rel="icon" href="../../images/india.png?v=2" type="image/png" />
+  <link href="https://img1.digitallocker.gov.in/digilocker-landing-page/assets/fontawesome/css/all.css" rel="stylesheet" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f7f9fc;
+    }
+    .aadhaar-hero {
+      background: linear-gradient(to right, #0a2d5f, #083b7b);
+      color: #fff;
+      padding: 60px 20px 100px;
+      text-align: center;
+    }
+    .aadhaar-hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+    .aadhaar-hero p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    .aadhaar-login-card {
+      background: #fff;
+      max-width: 420px;
+      margin: -60px auto 40px;
+      padding: 30px 25px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .aadhaar-login-card img {
+      width: 55px;
+      margin-bottom: 15px;
+    }
+    .aadhaar-login-card h3 {
+      margin: 10px 0;
+      font-size: 1.3rem;
+      color: #333;
+    }
+    .aadhaar-login-card p {
+      font-size: 0.95rem;
+      color: #666;
+    }
+    .aadhaar-login-card button {
+      margin-top: 20px;
+      background: linear-gradient(to right, #0052cc, #00aaff);
+      color: #fff;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .aadhaar-login-card button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" class="active" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="../dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Hero Banner -->
+  <section class="aadhaar-hero">
+    <h2 data-i18n="aadhaar_hero_title">Welcome to Aadhaar eKYC</h2>
+    <p data-i18n="aadhaar_hero_desc">This is a simulation for training purposes. You can explore how Aadhaar-based verification works online.</p>
+  </section>
+
+  <!-- Login Simulation Box -->
+  <section class="aadhaar-login-card">
+    <img src="https://img.icons8.com/ios-filled/100/fingerprint.png" alt="Fingerprint Icon"/>
+    <h3 data-i18n="aadhaar_login_title">Login with Aadhaar and OTP</h3>
+    <p data-i18n="aadhaar_login_desc">Enter your Aadhaar number to receive an OTP and simulate the verification process.</p>
+    <button onclick="window.location.href='aadhaar_login.html'" data-i18n="aadhaar_login_btn">Login</button>
+  </section>
+
+</body>
+</html>

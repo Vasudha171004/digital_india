@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title data-i18n="dl_otp_title">DigiLocker: OTP Verification</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../css/digilocker.css" />
+  <script src="../../js/i18n.js" defer></script>
+  <link rel="icon" href="../../images/india.png" type="image/png" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-right">
+      <select id="languageSelect" aria-label="Select Language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="ta">தமிழ்</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="or">ଓଡ଼ିଆ</option>
+        <option value="ur">اردو</option>
+      </select>
+      <a href="../login.html" class="login-btn" data-i18n="login">Login</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="gov-header full-width-header">
+    <div class="header-left">
+      <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
+    </div>
+    <div class="header-title">
+      <h1 data-i18n="title">Digital India Access Training</h1>
+      <p data-i18n="mission">Digital India Mission</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="../home.html" data-i18n="nav_home">Home</a>
+    <a href="../courses.html" class="active" data-i18n="nav_courses">Courses</a>
+    <a href="../quiz.html" data-i18n="nav_quiz">Quiz</a>
+    <a href="../certificate.html" data-i18n="nav_certificate">Certificate</a>
+    <a href="../dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
+  </nav>
+
+  <!-- Main Content -->
+  <section class="digilocker-page">
+    <div class="digilocker-card">
+      <h2 data-i18n="dl_otp_heading">Verify OTP</h2>
+      <p class="helper-text" data-i18n="dl_otp_instruction">Please enter the OTP sent to your Aadhaar-linked mobile number.</p>
+      
+      <form id="otpForm">
+        <div class="otp-inputs">
+          <input type="password" maxlength="1" aria-label="OTP Digit 1" />
+          <input type="password" maxlength="1" aria-label="OTP Digit 2" />
+          <input type="password" maxlength="1" aria-label="OTP Digit 3" />
+          <input type="password" maxlength="1" aria-label="OTP Digit 4" />
+          <input type="password" maxlength="1" aria-label="OTP Digit 5" />
+          <input type="password" maxlength="1" aria-label="OTP Digit 6" />
+          <span class="toggle-pin" role="button" aria-label="Toggle OTP visibility">&#128065;</span>
+        </div>
+        <a class="trouble" href="#" data-i18n="dl_otp_resend">Resend OTP</a>
+        <button type="submit" class="continue-btn enabled" data-i18n="dl_otp_button">Verify</button>
+      </form>
+
+      <p id="displayOtp" style="margin-top: 1rem; color: #444; font-weight: bold;"></p>
+    </div>
+  </section>
+
+  <!-- OTP Script -->
+  <script>
+    const otpInputs = document.querySelectorAll('.otp-inputs input');
+    const toggleBtn = document.querySelector('.toggle-pin');
+
+    // Toggle visibility
+    toggleBtn.addEventListener('click', () => {
+      const isPassword = otpInputs[0].type === 'password';
+      otpInputs.forEach(input => input.type = isPassword ? 'text' : 'password');
+    });
+
+    // Auto shift cursor
+    otpInputs.forEach((input, idx) => {
+      input.addEventListener('input', () => {
+        if (input.value.length === 1 && idx < otpInputs.length - 1) {
+          otpInputs[idx + 1].focus();
+        }
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !input.value && idx > 0) {
+          otpInputs[idx - 1].focus();
+        }
+      });
+    });
+
+    // Submit form
+    document.getElementById("otpForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const otp = Array.from(otpInputs).map(input => input.value).join('');
+      const phone = localStorage.getItem('digilocker_phone');
+
+      if (otp.length !== 6) {
+        alert('Please enter a 6-digit OTP');
+        return;
+      }
+
+      try {
+        const res = await fetch('http://localhost:3001/api/digilocker/verify-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phoneNumber: phone, otp })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem('digilocker_token', data.token);
+          window.location.href = 'digilocker_dashboard.html';
+        } else {
+          alert(data.message || 'Invalid OTP');
+        }
+
+      } catch (err) {
+        console.error('OTP verification error:', err);
+        alert('Server error. Try again.');
+      }
+    });
+
+    // ✅ Display OTP for testing/demo
+    document.addEventListener('DOMContentLoaded', () => {
+      const otp = localStorage.getItem('lastSentOtp');
+      const displayEl = document.getElementById('displayOtp');
+      if (otp && displayEl) {
+        displayEl.textContent = `🟢 Your OTP is: ${otp}`;
+      }
+    });
+  </script>
+</body>
+</html>
