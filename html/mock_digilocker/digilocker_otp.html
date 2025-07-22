@@ -121,7 +121,7 @@
         const data = await res.json();
 
         if (res.ok) {
-          localStorage.setItem('digilocker_token', data.token);
+          localStorage.setItem('digiToken', data.token);
           window.location.href = 'digilocker_dashboard.html';
         } else {
           alert(data.message || 'Invalid OTP');

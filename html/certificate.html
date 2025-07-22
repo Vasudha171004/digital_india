@@ -126,12 +126,15 @@ function downloadPDF() {
   html2canvas: {
     scale: 3,         // 🔍 Higher resolution canvas
     useCORS: true,    // 🔐 Load images from same origin (like certificate_border.png)
-    logging: true,    // 🧪 Optional: logs to console to help debug
+    logging: false,    // 🧪 Optional: logs to console to help debug
     allowTaint: false
   },
-  jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+  jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
 };
+html2pdf().set(opt).from(document.querySelector('.certificate-box')).save();
+setTimeout(() => {
   html2pdf().set(opt).from(element).save();
+}, 500);
 }
 </script>
 </body>

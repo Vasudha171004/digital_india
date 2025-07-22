@@ -62,16 +62,15 @@
         <input type="password" id="confirm" name="confirm" required placeholder="Re-enter your password" data-i18n="register_confirm_placeholder" />
 
         <label for="gender" data-i18n="register_gender">Gender</label>
-<label for="gender" data-i18n="register_gender">Gender</label>
-<select id="gender" name="gender" required>
-  <option value="" data-i18n="register_gender_placeholder">--Select Gender--</option>
-  <option value="Male">Male</option>
-  <option value="Female">Female</option>
-  <option value="Other">Other</option>
-</select>
+        <select id="gender" name="gender" required>
+          <option value="" data-i18n="register_gender_placeholder">--Select Gender--</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
 
-<label for="dob" data-i18n="register_dob">Date of Birth</label>
-<input type="date" id="dob" name="dob" required />
+        <label for="dob" data-i18n="register_dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" required />
 
         <button type="submit" class="cta-btn" data-i18n="register_btn">Register</button>
 
@@ -84,49 +83,45 @@
   </main>
 
   <script>
-  document.getElementById('registerForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    // Gather form values
-    const fullName = document.getElementById("name").value.trim();
-    const email    = document.getElementById("email").value.trim();
-    const phoneNumber = document.getElementById("phone").value.trim();
-    const address  = document.getElementById("address").value.trim();
-    const password = document.getElementById("password").value;
-    const confirm  = document.getElementById("confirm").value;
-    const gender = document.getElementById("gender").value;
-    const dob    = document.getElementById("dob").value;
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const fullName = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phoneNumber = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirm").value;
+      const gender = document.getElementById("gender").value;
+      const dob = document.getElementById("dob").value;
 
-    // Basic front-end validations
-    const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
-    if (!strongRegex.test(password)) {
-      alert("Password is not strong enough. Please meet the requirements.");
-      return;
-    }
-    if (password !== confirm) {
-      alert("Passwords do not match.");
-      return;
-    }
-
-    try {
-      // Call the registration API
-      const res = await fetch('http://localhost:3001/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName, email, phoneNumber, address, password })
-      });
-      const data = await res.json();
-      if (res.ok) {
-        alert("✅ Registered successfully! Please login.");
-        window.location.href = "login.html";
-      } else {
-        // If registration failed (e.g., user exists or validation error)
-        alert(data.message || "Registration failed. Please try again.");
+      const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+      if (!strongRegex.test(password)) {
+        alert("Password is not strong enough. Please meet the requirements.");
+        return;
       }
-    } catch (err) {
-      console.error("Registration error:", err);
-      alert("Server error during registration. Please try again.");
-    }
-  });
-</script>
+      if (password !== confirm) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      try {
+        const res = await fetch('http://localhost:3001/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fullName, email, phoneNumber, address, password, gender, dob })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          alert("✅ Registered successfully! Please login.");
+          window.location.href = "login.html";
+        } else {
+          alert(data.message || "Registration failed. Please try again.");
+        }
+      } catch (err) {
+        console.error("Registration error:", err);
+        alert("Server error during registration. Please try again.");
+      }
+    });
+  </script>
 </body>
 </html>

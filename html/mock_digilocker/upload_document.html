@@ -11,7 +11,6 @@
 </head>
 <body>
 
-  <!-- Top Bar -->
   <div class="top-bar">
     <div class="top-right">
       <select id="languageSelect" aria-label="Select Language">
@@ -32,7 +31,6 @@
     </div>
   </div>
 
-  <!-- Header -->
   <header class="gov-header full-width-header">
     <div class="header-left">
       <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
@@ -43,7 +41,6 @@
     </div>
   </header>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <a href="../../html/home.html" data-i18n="nav_home">Home</a>
     <a href="../../html/courses.html" data-i18n="nav_courses">Courses</a>
@@ -65,16 +62,14 @@
     </div>
   </main>
 
-  <script>
-function getDigiHeaders() {
-  return {
-    'Authorization': `Bearer ${localStorage.getItem('digiToken')}`
-    // Note: Content-Type is auto-set when using FormData
-  };
-}
-
-document.querySelector("form").addEventListener("submit", async function(e) {
-  e.preventDefault();
+<script>
+async function uploadDoc() {
+  const token = localStorage.getItem('digiToken');
+  if (!token) {
+    alert('⚠️ You are not logged in');
+    window.location.href = '../../html/login.html';
+    return;
+  }
 
   const fileInput = document.getElementById('fileUpload');
   if (!fileInput.files.length) {
@@ -88,22 +83,27 @@ document.querySelector("form").addEventListener("submit", async function(e) {
   try {
     const res = await fetch('http://localhost:3001/api/digilocker/upload', {
       method: 'POST',
-      headers: getDigiHeaders(),
+      headers: { 'Authorization': `Bearer ${token}` },
       body: formData
     });
 
     const data = await res.json();
 
     if (res.ok) {
-      alert('✅ ' + (data.message || 'Document uploaded successfully!'));
-      window.location.href = "my_documents.html";
+      alert('✅ Document uploaded!');
+      window.location.href = 'my_documents.html';
     } else {
-      alert(data.message || '❌ Upload failed');
+      alert('❌ ' + data.message);
     }
   } catch (err) {
-    console.error('Upload error:', err);
-    alert('⚠️ Error uploading. Try again.');
+    console.error(err);
+    alert('⚠️ Upload failed. Try again.');
   }
+}
+
+document.querySelector('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  uploadDoc();
 });
 </script>
 </body>

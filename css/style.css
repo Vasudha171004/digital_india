@@ -558,7 +558,11 @@ a {
   background-position: center center !important;
   -webkit-print-color-adjust: exact !important;
   print-color-adjust: exact !important;
-}
+  box-shadow: 0 0 0 transparent !important;
+  opacity: 1 !important;
+} 
+
+
 
 .cert-title,
 .cert-name,
@@ -568,9 +572,11 @@ a {
 .cert-date {
   color: #000 !important;
   font-weight: bold !important;
+  opacity: 1 !important;
   -webkit-print-color-adjust: exact !important;
   print-color-adjust: exact !important;
 }
+
 .otp-box {
   background: #f0f0ff;
   border: 1px dashed #7b61ff;
@@ -581,3 +587,10 @@ a {
   font-weight: 600;
   color: #4b2ee3;
 }
+
+@media print {
+  .certificate-box {
+    page-break-inside: avoid;
+  }
+}
+

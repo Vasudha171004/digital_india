@@ -61,14 +61,14 @@
   <script>
     function getDigiHeaders() {
       return {
-        'Authorization': `Bearer ${localStorage.getItem('digilocker_token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('digiToken')}`,
         'Content-Type': 'application/json'
       };
     }
 
     document.addEventListener('DOMContentLoaded', async () => {
       const container = document.getElementById('documentsList');
-      const token = localStorage.getItem('digilocker_token');
+      const token = localStorage.getItem('digiToken');
 
       if (!token) {
         container.innerHTML = '<p>⚠️ Invalid or expired token.</p>';
@@ -97,7 +97,7 @@
               <p><strong>Type:</strong> ${doc.type}</p>
               <p><strong>Issued By:</strong> ${doc.issuedBy}</p>
               <p><strong>Issued On:</strong> ${doc.issueDate}</p>
-              <a href="${doc.fileUrl}" target="_blank">📄 View / Download</a>
+              <a href="http://localhost:3001${doc.fileUrl}" target="_blank">📄 View / Download</a>
             `;
             container.appendChild(card);
           });

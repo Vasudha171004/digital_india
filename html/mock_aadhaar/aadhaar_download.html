@@ -11,7 +11,6 @@
 </head>
 <body>
 
-  <!-- Top Bar -->
   <div class="top-bar">
     <div class="top-right">
       <select id="languageSelect" aria-label="select_language" data-i18n="select_language">
@@ -22,7 +21,6 @@
     </div>
   </div>
 
-  <!-- Header -->
   <header class="gov-header full-width-header">
     <div class="header-left">
       <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo" data-i18n="logo_alt" />
@@ -33,7 +31,6 @@
     </div>
   </header>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <a href="../home.html" data-i18n="nav_home">Home</a>
     <a href="../courses.html" data-i18n="nav_courses">Courses</a>
@@ -42,7 +39,6 @@
     <a href="aadhaar_dashboard.html" class="active" data-i18n="nav_dashboard">Dashboard</a>
   </nav>
 
-  <!-- Main Section -->
   <section class="download-section">
     <h2 data-i18n="aadhaar_review_heading">Review your Demographics Data</h2>
 
@@ -71,38 +67,37 @@
     </div>
   </section>
 
-  <!-- Data Fetch Script -->
   <script>
-  document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      // No token means user is not logged in; redirect to login page
-      alert("Please log in first.");
-      window.location.href = "login.html";
-      return;
-    }
-    try {
-      const res = await fetch('http://localhost:3001/api/user/profile', {
-        method: 'GET',
-        headers: { 'Authorization': 'Bearer ' + token }
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.error("Failed to fetch profile:", data);
-        alert(data.message || "Failed to retrieve user info.");
+    document.addEventListener('DOMContentLoaded', async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert("Please log in first.");
+        window.location.href = "../login.html";
         return;
       }
-      // ✅ Populate dashboard with user data
-      document.getElementById('aadhaarName').textContent = data.fullName;
-      document.getElementById('aadhaarAddress').textContent = data.address;
-      document.getElementById('aadhaarGender').textContent = data.gender || 'N/A';
-      document.getElementById('aadhaarDOB').textContent = data.dob || 'N/A';
-      // (If there are other dynamic fields to show, set them here as well)
-    } catch (err) {
-      console.error("Error fetching profile:", err);
-      alert("Could not load user data. Please try again.");
-    }
-  });
-</script>
+
+      try {
+        const res = await fetch('http://localhost:3001/api/user/profile', {
+          method: 'GET',
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          alert(data.message || "Failed to retrieve user info.");
+          return;
+        }
+
+        document.getElementById('aadhaarName').textContent = data.fullName || 'N/A';
+        document.getElementById('aadhaarAddress').textContent = data.address || 'N/A';
+        document.getElementById('aadhaarGender').textContent = data.gender || 'N/A';
+        document.getElementById('aadhaarDOB').textContent = data.dob || 'N/A';
+
+      } catch (err) {
+        console.error("Error fetching profile:", err);
+        alert("Could not load user data.");
+      }
+    });
+  </script>
 </body>
 </html>

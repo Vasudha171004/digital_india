@@ -11,7 +11,6 @@
 </head>
 <body>
 
-  <!-- Top Bar -->
   <div class="top-bar">
     <div class="top-right">
       <select id="languageSelect" aria-label="Select Language">
@@ -32,7 +31,6 @@
     </div>
   </div>
 
-  <!-- Header -->
   <header class="gov-header full-width-header">
     <div class="header-left">
       <img src="../../images/logo.png" alt="Digital India Access Logo" class="site-logo pulse-animation" />
@@ -43,7 +41,6 @@
     </div>
   </header>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <a href="../home.html" data-i18n="nav_home">Home</a>
     <a href="../courses.html" class="active" data-i18n="nav_courses">Courses</a>
@@ -52,7 +49,6 @@
     <a href="../dashboard.html" data-i18n="nav_dashboard">Dashboard</a>
   </nav>
 
-  <!-- Appointment Form -->
   <main class="appointment-container">
     <h2 data-i18n="ehospital_book_heading">Book an Appointment</h2>
     <form id="appointmentForm">
@@ -93,17 +89,14 @@
 
       <label for="date" data-i18n="ehospital_book_date">Preferred Date</label>
       <input type="date" id="date" required />
-      <div id="successMessage" style="display:none;"></div>
 
       <button type="submit" data-i18n="ehospital_book_submit">Book Appointment</button>
     </form>
 
-    <div id="successMessage" class="success-message" style="display: none;">
-      <span data-i18n="ehospital_book_success">✅ Your appointment has been booked successfully!</span>
-    </div>
+    <div id="successMessage" class="success-message" style="display: none;"></div>
   </main>
 
- <script>
+<script>
   function getAuthHeaders() {
     return {
       'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -115,10 +108,10 @@
     e.preventDefault();
 
     const appointment = {
-      name: document.getElementById('name').value,
-      age: document.getElementById('age').value,
+      name: document.getElementById('name').value.trim(),
+      age: parseInt(document.getElementById('age').value, 10),
       gender: document.getElementById('gender').value,
-      mobile: document.getElementById('mobile').value,
+      mobile: document.getElementById('mobile').value.trim(),
       hospital: document.getElementById('hospital').value,
       department: document.getElementById('department').value,
       date: document.getElementById('date').value
@@ -134,27 +127,62 @@
       const data = await res.json();
 
       if (res.ok) {
-        // Save patient ID for IPD usage
         localStorage.setItem('lastPatientId', data.patientId);
+        localStorage.setItem('lastPatientName', appointment.name);
 
-        // Show success message with Patient ID
         document.getElementById("successMessage").style.display = "block";
-        document.getElementById('successMessage').innerHTML = `
+        document.getElementById("successMessage").innerHTML = `
           <p style="color: green;">✅ Your appointment has been booked successfully!</p>
           <p><strong>Patient ID:</strong> ${data.patientId}</p>
+          <p><strong>Patient Name:</strong> ${appointment.name}</p>
         `;
 
         window.scrollTo({ top: 0, behavior: "smooth" });
-
       } else {
         alert(data.message || 'Appointment booking failed.');
       }
-
     } catch (err) {
       console.error('Appointment error:', err);
       alert('Server error. Please try again.');
     }
   });
+</script>
+
+<script>
+  // <![CDATA[
+  if ('WebSocket' in window) {
+    (function () {
+      function refreshCSS() {
+        var sheets = [].slice.call(document.getElementsByTagName("link"));
+        var head = document.getElementsByTagName("head")[0];
+        for (var i = 0; i < sheets.length; ++i) {
+          var elem = sheets[i];
+          var parent = elem.parentElement || head;
+          parent.removeChild(elem);
+          var rel = elem.rel;
+          if (elem.href && (typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet")) {
+            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+          }
+          parent.appendChild(elem);
+        }
+      }
+      var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+      var address = protocol + window.location.host + window.location.pathname + '/ws';
+      var socket = new WebSocket(address);
+      socket.onmessage = function (msg) {
+        if (msg.data == 'reload') window.location.reload();
+        else if (msg.data == 'refreshcss') refreshCSS();
+      };
+      if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+        console.log('Live reload enabled.');
+        sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+      }
+    })();
+  } else {
+    console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+  }
+  // ]]>
 </script>
 </body>
 </html>

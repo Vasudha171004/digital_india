@@ -16,7 +16,7 @@ const generateToken = (id) => {
 
 // 📌 POST /api/auth/register – Register New User
 router.post('/register', async (req, res) => {
-  const { fullName, email, phoneNumber, address, password } = req.body;
+  const { fullName, email, phoneNumber, address, password, gender, dob } = req.body;
   if (!fullName || !email || !phoneNumber || !address || !password) {
     return res.status(400).json({ message: 'Please fill all fields' });
   }
@@ -31,12 +31,14 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     const user = await User.create({
-      fullName,
-      email,
-      phoneNumber,
-      address,
-      password: hashedPassword,
-    });
+  fullName,
+  email,
+  phoneNumber,
+  address,
+  password: hashedPassword,
+  gender,
+  dob
+});
     // Return user info and token if creation was successful
     if (user) {
       const token = generateToken(user._id);
