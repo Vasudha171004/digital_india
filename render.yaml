@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: digital-india-backend
-    env: node
-    rootDir: server
-    buildCommand: npm install
-    startCommand: node server.js
-    plan: free
